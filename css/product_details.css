@@ -1,0 +1,230 @@
+/* basic style */
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--base-color);
+  color: var(--font-color);
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+}
+
+:root {
+  --font-heading: "Montserrat", sans-serif;
+  --font-para: "Poppins", sans-serif;
+  --line-height: 1.4;
+  --letter-spacing: 0.02em;
+  --base-color: #ff523b;
+  --font-color: #fff;
+  --head-color: #415161;
+  --transition: all 0.3s;
+}
+
+body {
+  cursor: default;
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+/* re-usable components start */
+
+a {
+  color: #000;
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-family: var(--font-para);
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
+}
+
+span {
+  color: #000;
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-family: var(--font-para);
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
+}
+
+button {
+  color: #000;
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-family: var(--font-para);
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
+}
+
+p {
+  color: #000;
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-family: var(--font-para);
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
+}
+
+h1 {
+  color: #000;
+  font-size: 3.5rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
+  margin: 0;
+}
+
+h2 {
+  color: #000;
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
+  margin: 0;
+  position: relative;
+}
+
+h3 {
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
+  margin: 0;
+}
+
+h4 {
+  color: #000;
+  font-size: 2rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
+  margin: 0;
+}
+
+h5 {
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-family: var(--font-heading);
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
+  margin: 0;
+}
+
+h6 {
+  color: #000;
+  font-size: 1.3rem;
+  font-weight: 400;
+  font-family: var(--font-heading);
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
+  margin: 0;
+}
+
+h2::after {
+  content: "";
+  width: 6rem;
+  height: 0.3rem;
+  display: block;
+  position: absolute;
+  top: 145%;
+  left: 50%;
+  transform: translate(-50%, -145%);
+  background: var(--base-color);
+  border: none;
+  border-radius: 0.5rem;
+}
+
+/* overview section start */
+
+.overview-container {
+  width: 100%;
+  height: auto;
+  padding: 4% 0 10% 0;
+}
+
+.img-container {
+  text-align: center;
+  overflow: hidden;
+}
+
+.img-container img {
+  max-width: 100%;
+}
+
+.description-container {
+  text-transform: capitalize;
+}
+
+.pagepath-container {
+  padding: 3% 0 5% 0;
+}
+
+.page-path a {
+  text-decoration: none;
+  text-transform: capitalize;
+  font-size: 1.7rem;
+  color: var(--head-color);
+}
+
+.page-path {
+  font-size: 1.7rem;
+  color: var(--head-color);
+}
+
+.product-title {
+  padding: 0 0 3% 0;
+}
+
+.product-title h4 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: var(--head-color);
+}
+
+.product-price {
+  padding: 0 0 3% 0;
+}
+
+.product-price h5 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--head-color);
+}
+
+.quantity {
+  width: 20%;
+  outline: none;
+  border: 0.1rem solid #c6c6c6;
+  color: var(--head-color);
+  padding: 1.2rem 1.2rem 1.2rem 1.4rem;
+}
+
+.product_description {
+  padding: 3% 0;
+  text-align: justify;
+}
+
+.product_description p {
+  line-height: 1.5;
+  color: var(--head-color);
+  text-transform: capitalize;
+}
+
+/* overview section end */
