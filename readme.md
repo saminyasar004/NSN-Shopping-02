@@ -33,10 +33,18 @@ Please follow the below instructions to run this project in your machine:
    ```
 3. Now install XAMPP server
 4. Enter to the project root directory
-5. Now open your favourite browser, then hit
+5. Go to database folder on the root directory
+6. Select the e-commerce.sql file
+7. Open your favourite browser and hit
    ```sh
-   https://localhost/home.php
+   https://localhost/phpmyadmin
    ```
+8. Now click Import from your database menu (right corner)
+9. Then upload the selected sql file from - [6](6.) 6 no. line
+10. Now open a new tab on your favourite browser, then hit
+    ```sh
+    https://localhost/home.php
+    ```
 
 <!-- CONTACT -->
 
