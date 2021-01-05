@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/saminyasar004/NSN-Shopping-02">
-    <img src="img/nsn.png" alt="Logo" width="80" height="80">
+    <img src="img/nsn.png" alt="Logo" width="120" height="80">
   </a>
 
 <br />
