@@ -23,18 +23,18 @@
 
 Please follow the below instructions to run this project in your machine:
 
-1. Clone this repository
-   ```sh
-   git clone https://github.com/saminyasar004/NSN-Shopping-02.git
-   ```
-2. Make sure you have download XAMPP server on your machine. Here you can download XAMPP
+1. Make sure you have download XAMPP server on your machine. Here you can download XAMPP
    ```sh
    https://www.apachefriends.org/download.html
    ```
-3. Now install XAMPP server
-4. Enter to the project root directory
-5. Go to database folder on the root directory
-6. Select the e-commerce.sql file
+2. Now install XAMPP server
+3. Clone this repository on your xampp/htdocs folder
+   ```sh
+   git clone https://github.com/saminyasar004/NSN-Shopping-02.git
+   ```
+4. Enter to the project root directory (NSN-Shopping-02)
+5. Go to database folder on the root directory (NSN-Shopping-02)
+6. Select the e-commerce.sql file (NSN-Shopping-02)
 7. Open your favourite browser and hit
    ```sh
    https://localhost/phpmyadmin
@@ -43,8 +43,9 @@ Please follow the below instructions to run this project in your machine:
 9. Then upload the selected sql file from 6 no. line
 10. Now open a new tab on your favourite browser, then hit
     ```sh
-    https://localhost/home.php
+    https://localhost/NSN-Shopping-02/home.php
     ```
+11. Now, all done! Let's enjoy..
 
 <!-- CONTACT -->
 
