@@ -9,6 +9,20 @@ let zoomLevel = undefined;
 
 // eventlistener
 
+// imgContainer.addEventListener("wheel", (e) => {
+//   if (e.deltaY < 0) {
+//     zoomLevel += 2;
+//     if (zoomLevel >= 4) {
+//       zoomLevel = 4;
+//     }
+//   } else if (e.deltaY > 0) {
+//     zoomLevel -= 2;
+//     if (zoomLevel <= 2) {
+//       zoomLevel = 2;
+//     }
+//   }
+// });
+
 imgContainer.addEventListener("mousemove", (e) => {
   const x = e.offsetX;
   const y = e.offsetY;
@@ -24,17 +38,3 @@ imgContainer.addEventListener("mouseleave", () => {
   productImg.style.transformOrigin = `center center`;
   productImg.style.transform = `scale(${zoomLevel})`;
 });
-
-// imgContainer.addEventListener('wheel', (e) => {
-//   if (e.deltaY < 0) {
-//     zoomLevel += 2;
-//     if (zoomLevel >= 4) {
-//       zoomLevel = 4;
-//     }
-//   } else if (e.deltaY > 0) {
-//     zoomLevel -= 2;
-//     if (zoomLevel <= 2) {
-//       zoomLevel = 2;
-//     }
-//   }
-// });

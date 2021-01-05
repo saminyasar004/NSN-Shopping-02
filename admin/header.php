@@ -1,12 +1,13 @@
 <?php
-session_start();
-if (!isset($_SESSION['fullname'])) {
+include "./connect.php";
+include "./functions.php";
+if (!isset($_SESSION["user_role"]) && !isset($_SESSION["user_fullname"])) {
     header("location: index.php");
 } else {
-    $fullname = $_SESSION['fullname'];
-    $user_role = $_SESSION['user_role'];
+    autoLogout();
+    $user_role = $_SESSION["user_role"];
+    $user_fullname = $_SESSION["user_fullname"];
 ?>
-
     <!DOCTYPE html>
     <html lang="en">
 
@@ -15,7 +16,9 @@ if (!isset($_SESSION['fullname'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>ADMIN Panel</title>
+        <title>Admin Panel</title>
+        <!-- favicon icon -->
+        <link rel="icon" href="./images/cart.png" type="image/x-icon">
         <!-- Bootstrap -->
         <link rel="stylesheet" href="./css/bootstrap.min.css" />
         <!-- Font Awesome Icon -->
@@ -33,12 +36,12 @@ if (!isset($_SESSION['fullname'])) {
                 <div class="row">
                     <!-- LOGO -->
                     <div class="col-md-2">
-                        <a href="product.php"><img class="logo" src="images/logo.png"></a>
+                        <a target="blank" href="../home.php"><img class="logo" src="images/logo.png"></a>
                     </div>
                     <!-- /LOGO -->
                     <!-- LOGO-Out -->
                     <div class="col-md-offset-9  col-md-1 Adminmenu">
-                        <span class="username"><?php echo $fullname; ?></span><a href="logout.php" class="admin-logout">logout</a>
+                        <span class="username"><?php echo $user_fullname; ?></span><a href="logout.php" class="admin-logout">logout</a>
                     </div>
                     <!-- /LOGO-Out -->
                 </div>
@@ -55,14 +58,20 @@ if (!isset($_SESSION['fullname'])) {
                                 <li>
                                     <a href="product.php">Product</a>
                                 </li>
+                                <li>
+                                    <a href="category.php">Category</a>
+                                </li>
                                 <?php
-                                if ($user_role == 1) {
+                                if ($user_role == "1") {
                                 ?>
                                     <li>
-                                        <a href="category.php">Category</a>
+                                        <a href="users.php">Users</a>
                                     </li>
                                     <li>
-                                        <a href="users.php">Users</a>
+                                        <a href="customers.php">customers</a>
+                                    </li>
+                                    <li>
+                                        <a href="orders.php">orders</a>
                                     </li>
                                 <?php
                                 }
@@ -74,4 +83,6 @@ if (!isset($_SESSION['fullname'])) {
             </div>
         </div>
         <!-- /Menu Bar -->
-    <?php }  ?>
+    <?php
+}
+    ?>

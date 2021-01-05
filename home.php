@@ -15,53 +15,44 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!--- FONT AWESOME 4 CDN ------>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- linking stylesheet file -->
     <link rel="stylesheet" href="vendor/css/normalize.css">
     <link rel="stylesheet" href="vendor/css/grid.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/home.css">
+    <!-- linking javascript file -->
+    <script src="js/index.js" defer></script>
 </head>
 
 <body>
 
     <!-- header section start -->
 
-    <header class="headerSection">
-        <div class="row">
-            <div class="navContainer">
-                <nav>
-                    <div class="logo">
-                        <a href="home.php">
-                            <img src="img/nsn.png" alt="NSN Shopping">
-                        </a>
-                    </div>
-                    <div class="navLinks">
-                        <ul>
-                            <li><a class="activeLink" href="home.php">home</a></li>
-                            <li><a href="store.php">store</a></li>
-                            <li><a href="men.php">men</a></li>
-                            <li><a href="women.php">women</a></li>
-                            <li><a href="">account</a></li>
-                            <li><a href="#"><span class="count">0</span></a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
+    <?php include "header.php"; ?>
+
+    <!-- header section end -->
+
+    <!-- headerContainer start -->
+
+    <div class="headerContainer">
         <div class="row">
             <div class="heroContainer">
                 <div class="col1 span-1-of-2 hero_text_box">
                     <h4>best quality products</h4>
                     <h1>we print what you want!</h1>
                     <p>Click the button below to get started.</p>
-                    <a href="store.php" class="btn btnHero">get started →</a>
+                    <a href="account.php" class="btn btnHero">get started →</a>
                 </div>
                 <div class="col1 span-1-of-2 hero_image_box">
                     <img src="img/hero-bg.png">
                 </div>
             </div>
         </div>
-    </header>
+    </div>
 
-    <!-- header section end -->
+    <!-- headerContainer end -->
 
     <!-- showcase section start -->
 
@@ -200,19 +191,7 @@
 
     <!-- footer section start -->
 
-    <footer class="footerSection">
-        <div class="row">
-            <div class="col1 span-1-of-3 footerWidget">
-                <a href="home.php">
-                    <img src="img/nsn-white.png" alt="NSN Shopping">
-                </a>
-            </div>
-            <div class="col1 span-1-of-3 footerWidget"></div>
-            <div class="col1 span-1-of-3 footerWidget">
-                <h6>copyright © 2020 || all rights researved</h6>
-            </div>
-        </div>
-    </footer>
+    <?php include "footer.php"; ?>
 
     <!-- footer section end -->
 

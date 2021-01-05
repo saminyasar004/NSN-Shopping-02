@@ -75,10 +75,27 @@ h2.page-heading {
   transition: var(--transition);
 }
 
-.btn:hover {
+.btn:hover,
+.btn-primary:hover,
+.btn-success:hover,
+.btn-danger:hover,
+.btn-info:hover,
+.btn-warning:hover {
   color: var(--base-color);
   border: 0.2rem solid var(--base-color);
   background: transparent;
+}
+
+.btn:focus,
+.btn-primary:focus,
+.btn-success:focus,
+.btn-danger:focus,
+.btn-info:focus,
+.btn-warning:focus {
+  color: var(--base-color);
+  border: 0.2rem solid var(--base-color);
+  background: transparent;
+  outline: none;
 }
 
 /* ===================== */
@@ -95,12 +112,16 @@ h2.page-heading {
 
 .php_error {
   text-align: center;
-  text-transform: capitalize;
   color: var(--base-color);
-  margin-top: 4%;
+  /* margin-top: 2%; */
   margin-bottom: 2%;
   font-size: 15px;
   font-weight: 400;
+}
+
+input[type="file"] {
+  cursor: pointer !important;
+  outline: none !important;
 }
 
 .logo {
@@ -246,6 +267,10 @@ img.logo {
   padding: 10px;
   border: 1px solid #fff;
   text-align: center;
+  /* text-transform: capitalize; */
+}
+
+#admin-content .content-table tbody td:nth-child(3) {
   text-transform: capitalize;
 }
 

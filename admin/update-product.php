@@ -1,50 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Product</title>
-</head>
-
-<body>
-  <?php
-  if (isset($_REQUEST['submit'])) {
-    include "config.php";
-    $error = '';
-    $product_id = mysqli_real_escape_string($connect, $_REQUEST['product_id']);
-    $product_name = mysqli_real_escape_string($connect, $_REQUEST['product_name']);
-    $product_price = mysqli_real_escape_string($connect, $_REQUEST['product_price']);
-    $product_desc = mysqli_real_escape_string($connect, $_REQUEST['product_desc']);
-    $product_category = mysqli_real_escape_string($connect, $_REQUEST['product_category']);
-    $product_author = mysqli_real_escape_string($connect, $_REQUEST['product_author']);
-    $old_image = mysqli_real_escape_string($connect, $_REQUEST['old-image']);
-    $new_img = $_FILES['new-image'];
-    echo $new_img_name = $new_img['name'];
-    if (empty($new_img_name)) {
-      $product_img = $old_image;
-    } else {
-      $new_img_tmp_name = $new_img['tmp_name'];
-      $new_img_type = $new_img['type'];
-      $new_img_ext = end(explode(".", $new_img_name));
-      $new_img_valid_exts = ['png', 'jpeg', 'jpg'];
-      if (in_array($new_img_ext, $new_img_valid_exts) === false) {
-        $error = 'please select a png , jpeg or jpeg image';
-      }
-      $product_img = uniqid() . "." . $new_img_ext;
-      $loc = 'upload/';
-      move_uploaded_file($new_img_tmp_name, $loc . $product_img);
-      unlink($loc . $old_image);
+<?php include "header.php"; ?>
+<?php
+if (isset($_REQUEST["submit"])) {
+  $product_id = mysqli_real_escape_string($connect, $_REQUEST["product_id"]);
+  $product_name = mysqli_real_escape_string($connect, $_REQUEST["product_name"]);
+  $product_price = mysqli_real_escape_string($connect, $_REQUEST["product_price"]);
+  $product_description = mysqli_real_escape_string($connect, $_REQUEST["product_description"]);
+  $old_product_category = mysqli_real_escape_string($connect, $_REQUEST["old_product_category"]);
+  $new_product_category = mysqli_real_escape_string($connect, $_REQUEST["new_product_category"]);
+  $product_new_image = $_FILES["new_image"];
+  $product_new_image_name = $product_new_image["name"];
+  $product_old_image = mysqli_real_escape_string($connect, $_REQUEST["old_image"]);
+  if ($old_product_category != $new_product_category) {
+    if (switchCategory($connect, $new_product_category, $old_product_category) == false) {
+      header("location: edit-product.php?err=cannotUpdate");
+      die();
     }
-    if (empty($error) == true) {
-      $query_update = "UPDATE product_info SET name = '$product_name', price = '$product_price', description = '$product_desc', category = '$product_category', author = '$product_author', img = '$product_img' WHERE product_info.id = '$product_id'";
-      $result_update = mysqli_query($connect, $query_update);
-      header('location: product.php');
-    }
-  } else {
-    header('location: product.php');
   }
-  ?>
-</body>
-
-</html>
+  if (empty($product_new_image_name)) {
+    $new_image_name = $product_old_image;
+  } else {
+    $loc = "upload/";
+    $product_new_image_tmp_name = $product_new_image["tmp_name"];
+    $product_new_image_extension = end(explode(".", $product_new_image_name));
+    $valid_extension = array("png", "jpg", "jpeg");
+    if (in_array($product_new_image_extension, $valid_extension) == false) {
+      header("location: edit-product.php?edit_id=$product_id&err=invalidExtension");
+      die();
+    }
+    $new_image_name = $product_name . "." . $product_new_image_extension;
+    unlink($loc . $product_old_image);
+    move_uploaded_file($product_new_image_tmp_name, $loc . $new_image_name);
+  }
+  if (updateProduct($connect, $product_id, $product_name, $product_price, $product_description, $new_product_category, $new_image_name) == false) {
+    header("location: edit-product.php?edit_id=$product_id&err=cannotUpdate");
+    die();
+  } else {
+    header("location: product.php?err=successfullyUpdated");
+  }
+}
+?>

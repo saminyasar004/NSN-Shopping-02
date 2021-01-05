@@ -1,5 +1,5 @@
 <?php include "header.php"; ?>
-<?php $end_data = "";  ?>
+<?php $err = ""; ?>
 <div id="admin-content">
     <div class="container">
         <div class="row">
@@ -10,99 +10,89 @@
                 <a class="btn" href="add-product.php">add product</a>
             </div>
             <div class="col-md-12">
-                <?php
-                include "config.php";
-                if (isset($_REQUEST['current_page'])) {
-                    $current_page = $_REQUEST['current_page'];
-                } else {
-                    $current_page = 1;
-                }
-                $limit = 6;
-                $offset = ($current_page - 1) * $limit;
-                if ($_SESSION['user_role'] == 1) {
-                    $query_select = "SELECT * FROM product_info LIMIT {$offset}, {$limit}";
-                } else {
-                    $user_role = $_SESSION['user_role'];
-                    $query_select = "SELECT * FROM product_info WHERE author = '$user_role' LIMIT {$offset}, {$limit}";
-                }
-                $result_select = mysqli_query($connect, $query_select);
-                $count = mysqli_num_rows($result_select);
-                if ($count > 0) {
-                    $serial_number = 0;
-                ?>
-                    <table class="content-table">
-                        <thead>
-                            <th>S.No.</th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Category</th>
-                            <th>Date</th>
-                            <th>Author</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </thead>
-                        <tbody>
-                            <?php
+                <table class="content-table">
+                    <thead>
+                        <th>S.No.</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Author</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $limit = 5;
+                        if (isset($_REQUEST["current_page"])) {
+                            $current_page = $_REQUEST["current_page"];
+                        } else {
+                            $current_page = 1;
+                        }
+                        $offset = ($current_page - 1) * $limit;
+                        $result_select = allDataPagination($connect, "product_info", $offset, $limit);
+                        $count = mysqli_num_rows($result_select);
+                        if ($count > 0) {
+                            $serial_no = 0;
                             while ($row = mysqli_fetch_assoc($result_select)) {
-                                $product_id = $row['id'];
-                                $product_name = $row['name'];
-                                $product_price = $row['price'];
-                                $product_description = $row['description'];
-                                $product_category = $row['category'];
-                                $product_date = $row['date'];
-                                $product_author = $row['author'];
-                                $product_img = $row['img'];
-                                $serial_number++;
-                            ?>
+                                $product_id = $row["id"];
+                                $product_name = $row["name"];
+                                $product_price = $row["price"];
+                                $product_description = $row["description"];
+                                $product_category_id = $row["category"];
+                                $product_date = $row["date"];
+                                $product_author = $row["author"];
+                                $product_image = $row["img"];
+                                $serial_no++;
+                                $result_select_category = categoryNameById($connect, $product_category_id);
+                                while ($row_category = mysqli_fetch_assoc($result_select_category)) {
+                                    $product_category_name = $row_category["category_name"];
+                                }
+                        ?>
                                 <tr>
-                                    <td class="id"><?php echo $serial_number; ?></td>
-                                    <th class="product_img_th"><img src="upload/<?php echo $product_img; ?>"></th>
+                                    <td class="id"><?php echo $serial_no; ?></td>
+                                    <td class="product_img_th"><img src="upload/<?php echo $product_image; ?>"></td>
                                     <td><?php echo $product_name; ?></td>
-                                    <td><?php echo $product_price; ?></td>
-                                    <td><?php
-                                        $query_category = "SELECT * FROM category WHERE category_id = '$product_category'";
-                                        $result_category = mysqli_query($connect, $query_category);
-                                        while ($row_category = mysqli_fetch_assoc($result_category)) {
-                                            $category_name = $row_category['category_name'];
-                                            echo $category_name;
-                                        }
-                                        ?></td>
+                                    <td>$<?php echo $product_price; ?></td>
+                                    <td><?php echo $product_category_name; ?></td>
                                     <td><?php echo $product_date; ?></td>
-                                    <td><?php
-                                        if ($product_author == 1) {
-                                            echo "Admin";
-                                        } else {
-                                            echo "Moderator";
-                                        }
-                                        ?></td>
+                                    <td><?php echo $product_author; ?></td>
                                     <td class='edit'><a href='edit-product.php?edit_id=<?php echo $product_id; ?>'><i class='fa fa-edit'></i></a></td>
-                                    <td class='delete'><a onclick="return confirm('Are you want to delete this product?')" href='delete-product.php?delete_id=<?php echo $product_id; ?>'><i class='fa fa-trash-o'></i></a></td>
+                                    <td class='delete'><a onclick="return confirm('Are you want to delete this product?')" href='delete-product.php?delete_id=<?php echo $product_id; ?>&category_id=<?php echo $product_category_id; ?>&image=<?php echo $product_image; ?>'><i class='fa fa-trash-o'></i></a></td>
                                 </tr>
-                            <?php
+                        <?php
                             }
-                            ?>
-                        </tbody>
-                    </table>
+                        } else {
+                            $err = "there are no product on your database.";
+                            $err = ucfirst($err);
+                        }
+                        ?>
+                    </tbody>
+                </table>
                 <?php
-                } else {
-                    $end_data = "you have no product on your database";
+                if (isset($_REQUEST["err"])) {
+                    $getErr = $_REQUEST["err"];
+                    if ($getErr == "cannotDelete") {
+                        $err = "cannot delete this product.";
+                    } else if ($getErr == "successfullyDeleted") {
+                        $err = "successfully deleted this product.";
+                    } else if ($getErr == "successfullyUpdated") {
+                        $err = "successfully updated product data.";
+                    } else {
+                        $err = "";
+                    }
+                    $err = ucfirst($err);
+                ?>
+                    <div class="php_error">
+                        <?php echo $err; ?>
+                    </div>
+                <?php
                 }
                 ?>
-
-                <div class="php_error">
-                    <?php echo $end_data; ?>
-                </div>
                 <?php
-                if ($_SESSION['user_role'] == 1) {
-                    $query_pagination = "SELECT * FROM product_info";
-                } else {
-                    $user_role = $_SESSION['user_role'];
-                    $query_pagination = "SELECT * FROM product_info WHERE author = '$user_role'";
-                }
-
-                $result_pagination = mysqli_query($connect, $query_pagination);
-                $total_data = mysqli_num_rows($result_pagination);
+                $result_select = allData($connect, "product_info");
+                $total_data = mysqli_num_rows($result_select);
                 if ($total_data > 0) {
                     $total_page = ceil($total_data / $limit);
                     if ($total_page > 1) {
@@ -114,14 +104,15 @@
                                 <li><a href="product.php?current_page=<?php echo $current_page - 1; ?>">⇽</a></li>
                             <?php
                             }
+                            $active_page = "";
                             for ($i = 1; $i <= $total_page; $i++) {
-                                if ($i == $current_page) {
-                                    $active = "active";
+                                if ($current_page == $i) {
+                                    $active_page = "active";
                                 } else {
-                                    $active = "";
+                                    $active_page = "";
                                 }
                             ?>
-                                <li class="<?php echo $active; ?>"><a href="product.php?current_page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                <li class="<?php echo $active_page; ?>"><a href="product.php?current_page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
                             <?php
                             }
                             if ($current_page < $total_page) {
@@ -135,7 +126,6 @@
                     }
                 }
                 ?>
-
             </div>
         </div>
     </div>

@@ -1,10 +1,11 @@
 <?php
-session_start();
-if (isset($_SESSION['fullname'])) {
+include "./connect.php";
+include "./functions.php";
+if (isset($_SESSION["user_role"]) && isset($_SESSION["user_fullname"])) {
     header("location: product.php");
 } else {
 ?>
-
+    <?php $err = ""; ?>
     <!DOCTYPE html>
     <html>
 
@@ -12,7 +13,9 @@ if (isset($_SESSION['fullname'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>ADMIN | Login</title>
+        <title>Admin | Login</title>
+        <!-- favicon icon -->
+        <link rel="icon" href="./images/cart.png" type="image/x-icon">
         <link rel="stylesheet" href="css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/style.css">
@@ -29,47 +32,63 @@ if (isset($_SESSION['fullname'])) {
                         <h3 class="heading">Login</h3>
                         <!-- Form Start -->
                         <?php
-                        $invalid_msg = "";
-                        if (isset($_REQUEST['login'])) {
-                            include "config.php";
-                            $username = mysqli_real_escape_string($connect, $_REQUEST['username']);
-                            $pwd = mysqli_real_escape_string($connect, $_REQUEST['password']);
-                            if ($username || $pwd != "") {
-                                $query = "SELECT * FROM user WHERE username = '$username' AND password = '$pwd'";
-                                $result = mysqli_query($connect, $query);
-                                $count = mysqli_num_rows($result);
-                                if ($count > 0) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        $fname = $row['first_name'];
-                                        $fname = ucfirst($fname);
-                                        $lname = $row['last_name'];
-                                        $lname = ucfirst($lname);
-                                        $fullname = $fname . " " . $lname;
-                                        $user_role = $row['role'];
-                                    }
-                                    $_SESSION['username'] = $username;
-                                    $_SESSION['fullname'] = $fullname;
-                                    $_SESSION['user_role'] = $user_role;
-                                    header("location: product.php");
-                                } else {
-                                    $invalid_msg = "please enter your correct login details";
-                                }
+                        if (isset($_REQUEST["submit"])) {
+                            $username = mysqli_real_escape_string($connect, $_REQUEST["username"]);
+                            $password = mysqli_real_escape_string($connect, hashPassword($_REQUEST["password"]));
+                            if (emptyLogin($username, $password) == false) {
+                                header("location: index.php?err=emptyLogin");
+                                die();
                             }
+                            if (userLogin($connect, $username, $password) == false) {
+                                header("location: index.php?err=incorrectLoginDetails");
+                                die();
+                            }
+                            $result_select = userLogin($connect, $username, $password);
+                            while ($row = mysqli_fetch_assoc($result_select)) {
+                                $user_id = $row["user_id"];
+                                $user_fname = $row["first_name"];
+                                $user_lname = $row["last_name"];
+                                $user_username = $row["username"];
+                                $user_email = $row["email"];
+                                $user_role = $row["role"];
+                                $user_fullname = ucfirst($user_fname) . " " . ucfirst($user_lname);
+                                $_SESSION["user_role"] = $user_role;
+                                $_SESSION["user_fullname"] = $user_fullname;
+                                $_SESSION["current_time"] = time();
+                            }
+                            header("location: product.php");
                         }
                         ?>
-                        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                        <form action="<?php $_SERVER["PHP_SELF"] ?>" method="POST" autocomplete="off">
+                            <?php
+                            if (isset($_REQUEST["err"])) {
+                                $getErr = $_REQUEST["err"];
+                                if ($getErr == "emptyLogin") {
+                                    $err = "all fields are required.";
+                                } else if ($getErr == "incorrectLoginDetails") {
+                                    $err = "please enter your correct login details.";
+                                } else {
+                                    $err = "";
+                                }
+                                $err = ucfirst($err);
+                            ?>
+                                <div class="php_error">
+                                    <?php
+                                    echo $err;
+                                    ?>
+                                </div>
+                            <?php
+                            }
+                            ?>
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="text" name="username" class="form-control" placeholder="" required>
+                                <input type="text" name="username" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="" required>
+                                <input type="password" name="password" class="form-control">
                             </div>
-                            <input type="submit" name="login" class="btn btn-login" value="login" />
-                            <div class="php_error">
-                                <?php echo $invalid_msg;  ?>
-                            </div>
+                            <input type="submit" name="submit" class="btn btn-login" value="login" />
                         </form>
                         <!-- /Form  End -->
                     </div>
@@ -79,4 +98,6 @@ if (isset($_SESSION['fullname'])) {
     </body>
 
     </html>
-<?php }  ?>
+<?php
+}
+?>

@@ -15,40 +15,22 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!--- FONT AWESOME 4 CDN ------>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- linking stylesheet file -->
     <link rel="stylesheet" href="vendor/css/normalize.css">
     <link rel="stylesheet" href="vendor/css/grid.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/store.css">
+    <!-- linking javascript file -->
+    <script src="js/index.js" defer></script>
 </head>
 
 <body>
 
-
-
     <!-- header section start -->
 
-    <header class="headerSection">
-        <div class="row">
-            <div class="navContainer">
-                <nav>
-                    <div class="logo">
-                        <a href="home.php">
-                            <img src="img/nsn.png" alt="NSN Shopping">
-                        </a>
-                    </div>
-                    <div class="navLinks">
-                        <ul>
-                            <li><a href="home.php">home</a></li>
-                            <li><a class="activeLink" href="store.php">store</a></li>
-                            <li><a href="men.php">men</a></li>
-                            <li><a href="women.php">women</a></li>
-                            <li><a href="">account</a></li>
-                            <li><a href="#"><span class="count">0</span></a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </header>
+    <?php include "header.php"; ?>
 
     <!-- header section end -->
 
@@ -63,28 +45,40 @@
         <div class="row">
             <div class="productContainer">
                 <?php
-
-                include "include/connect.php";
-                $query = "select * from product_info";
-                $result = mysqli_query($connect, $query);
-                $count = mysqli_num_rows($result);
-                if ($count > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $product_id = $row['id'];
-                        $product_name = $row['name'];
-                        $product_price = $row['price'];
-                        $product_description = $row['description'];
-                        $product_category = $row['category'];
-                        $product_author = $row['author'];
-                        $product_date = $row['date'];
-                        $product_img = $row['img'];
-
+                if (isset($_REQUEST["err"])) {
+                    $getErr = $_REQUEST["err"];
+                    if ($getErr == "notFound") {
+                        $err = "our store is now empty.";
+                    } else {
+                        $err = "";
+                    }
+                    $err = ucfirst($err);
                 ?>
-
+                    <div class="php_error">
+                        <?php echo $err; ?>
+                    </div>
+                <?php
+                }
+                ?>
+                <?php
+                if (allData($connect, "product_info") == false) {
+                    header("location: store.php?err=notFound");
+                } else {
+                    $result_select_product = allData($connect, "product_info");
+                    while ($row_select_product = mysqli_fetch_assoc($result_select_product)) {
+                        $product_id = $row_select_product["id"];
+                        $product_name = $row_select_product["name"];
+                        $product_price = $row_select_product["price"];
+                        $product_description = $row_select_product["description"];
+                        $product_category = $row_select_product["category"];
+                        $product_date = $row_select_product["date"];
+                        $product_author = $row_select_product["author"];
+                        $product_img = $row_select_product["img"];
+                ?>
                         <div class="co1 span-1-of-4 productBox">
-                            <a href="product_details.php?product_id=<?php echo $product_id; ?>">
+                            <a href="product_details.php?product_id=<?php echo $product_id; ?>&product_name=<?php echo $product_name; ?>">
                                 <div class="productImage">
-                                    <img src="admin/upload/<?php echo $product_img; ?>" alt="<?php echo $product_name; ?>">
+                                    <img src="admin/upload/<?php echo $product_img; ?>">
                                 </div>
                                 <div class="productName">
                                     <h4><?php echo $product_name; ?></h4>
@@ -101,13 +95,9 @@
                                 </div>
                             </a>
                         </div>
-
                 <?php
                     }
-                } else {
-                    header("location: home.php");
                 }
-
                 ?>
             </div>
         </div>
@@ -117,19 +107,7 @@
 
     <!-- footer section start -->
 
-    <footer class="footerSection">
-        <div class="row">
-            <div class="col1 span-1-of-3 footerWidget">
-                <a href="home.php">
-                    <img src="img/nsn-white.png" alt="NSN Shopping">
-                </a>
-            </div>
-            <div class="col1 span-1-of-3 footerWidget"></div>
-            <div class="col1 span-1-of-3 footerWidget">
-                <h6>copyright © 2020 || all rights researved</h6>
-            </div>
-        </div>
-    </footer>
+    <?php include "footer.php"; ?>
 
     <!-- footer section end -->
 

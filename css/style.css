@@ -27,6 +27,7 @@ html {
   --base-color: #ff523b;
   --font-color: #fff;
   --head-color: #415161;
+  --para-color: #415161;
   --transition: all 0.3s;
 }
 
@@ -34,12 +35,13 @@ body {
   cursor: default;
   font-size: 1.4rem;
   font-weight: 400;
+  font-family: var(--font-para);
 }
 
 /* re-usable components start */
 
 a {
-  color: #000;
+  color: var(--para-color);
   font-size: 1.4rem;
   font-weight: 400;
   font-family: var(--font-para);
@@ -48,7 +50,7 @@ a {
 }
 
 span {
-  color: #000;
+  color: var(--para-color);
   font-size: 1.4rem;
   font-weight: 400;
   font-family: var(--font-para);
@@ -57,7 +59,7 @@ span {
 }
 
 button {
-  color: #000;
+  color: var(--para-color);
   font-size: 1.4rem;
   font-weight: 400;
   font-family: var(--font-para);
@@ -66,7 +68,7 @@ button {
 }
 
 p {
-  color: #000;
+  color: var(--para-color);
   font-size: 1.4rem;
   font-weight: 400;
   font-family: var(--font-para);
@@ -75,7 +77,7 @@ p {
 }
 
 h1 {
-  color: #000;
+  color: var(--head-color);
   font-size: 3.5rem;
   font-weight: 800;
   font-family: var(--font-heading);
@@ -85,7 +87,7 @@ h1 {
 }
 
 h2 {
-  color: #000;
+  color: var(--head-color);
   font-size: 3rem;
   font-weight: 700;
   font-family: var(--font-heading);
@@ -96,7 +98,7 @@ h2 {
 }
 
 h3 {
-  color: #000;
+  color: var(--head-color);
   font-size: 2.5rem;
   font-weight: 700;
   font-family: var(--font-heading);
@@ -106,7 +108,7 @@ h3 {
 }
 
 h4 {
-  color: #000;
+  color: var(--head-color);
   font-size: 2rem;
   font-weight: 600;
   font-family: var(--font-heading);
@@ -116,7 +118,7 @@ h4 {
 }
 
 h5 {
-  color: #000;
+  color: var(--head-color);
   font-size: 1.5rem;
   font-weight: 500;
   font-family: var(--font-heading);
@@ -126,7 +128,7 @@ h5 {
 }
 
 h6 {
-  color: #000;
+  color: var(--head-color);
   font-size: 1.3rem;
   font-weight: 400;
   font-family: var(--font-heading);
@@ -149,6 +151,41 @@ h2::after {
   border-radius: 0.5rem;
 }
 
+table {
+  border-collapse: collapse;
+}
+
+table thead th {
+  font-family: var(--font-heading);
+}
+
+table tbody td {
+  font-family: var(--font-para);
+}
+
+table thead {
+  background: var(--base-color);
+  color: var(--font-color);
+}
+
+input,
+textarea,
+select {
+  outline: none;
+  font-size: 1.4rem;
+  line-height: var(--line-height);
+  font-family: var(--font-para);
+}
+
+label {
+  color: var(--para-color);
+  font-family: var(--font-para);
+  text-transform: capitalize;
+  font-size: 1.5rem;
+}
+
+/* re-usable components start */
+
 .row {
   width: 100rem;
   margin: 0 auto;
@@ -156,6 +193,11 @@ h2::after {
 
 .activeLink {
   color: var(--base-color) !important;
+}
+
+.activeCount {
+  color: var(--font-color);
+  background: var(--base-color);
 }
 
 .btn {
@@ -177,399 +219,19 @@ h2::after {
   background: transparent;
 }
 
-/* re-usable components end */
-
-/* header section start */
-
-.headerSection {
-  width: 100%;
-  height: auto;
-}
-
-.navContainer {
-  width: 100%;
-  height: 8rem;
-}
-
-nav {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  width: 20%;
-  height: 100%;
-}
-
-.logo a {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo img {
-  max-width: 80%;
-}
-
-.navLinks {
-  width: 50%;
-  height: 100%;
-}
-
-.navLinks ul {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  list-style-type: none;
-}
-
-.navLinks ul li a {
-  text-decoration: none;
-  color: var(--head-color);
-  font-size: 1.5rem;
-  font-weight: 400;
-  text-transform: capitalize;
-  transition: var(--transition);
-}
-
-.navLinks ul li a:hover {
-  color: var(--base-color);
-}
-
-.count {
-  width: 3rem;
-  height: 3rem;
-  position: relative;
-  border: 0.2rem solid var(--base-color);
-  border-radius: 0 0 0.5rem 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  transition: var(--transition);
-}
-
-.count:hover {
-  color: var(--font-color);
-  background: var(--base-color);
-}
-
-.count:after {
-  bottom: 100%;
-  margin-bottom: 0;
-  height: 1.2rem;
-  width: 0.8rem;
-  left: 50%;
-  transform: translateX(-50%);
-  top: -1rem;
-  content: " ";
-  position: absolute;
-  pointer-events: none;
-  border-width: 0.2rem;
-  border-style: solid;
-  border-top-left-radius: 10rem;
-  border-top-right-radius: 10rem;
-  border-bottom: 0;
-  color: var(--base-color);
-}
-
-.heroContainer {
-  width: 100%;
-  height: auto;
-  padding: 3% 0 7% 0;
-}
-
-.hero_text_box {
-  padding-top: 15%;
-}
-
-.hero_text_box h4 {
-  color: var(--head-color);
-  text-transform: capitalize;
-  position: relative;
-  font-family: var(--font-para);
-}
-
-.hero_text_box h4:before {
-  content: "";
-  width: 6rem;
-  height: 0.3rem;
+.btnBlock {
   display: block;
-  position: absolute;
-  top: -130%;
-  left: 0;
-  background: var(--base-color);
-  border: none;
-  border-radius: 0.5rem;
-}
-
-.hero_text_box h1 {
-  color: var(--head-color);
-  text-transform: capitalize;
-  font-size: 5rem;
-  font-weight: 700;
-  margin: 4% 0;
-}
-
-.hero_text_box p {
-  color: var(--head-color);
-  font-size: 1.5rem;
-  margin-bottom: 10%;
-}
-
-.hero_image_box img {
-  max-width: 100%;
-}
-
-/* header section end */
-
-/* showcase section start */
-
-.showcaseSection {
-  width: 100%;
-  height: auto;
-  padding: 8% 0 5% 0;
-}
-
-.showcaseHeader {
-  width: 100%;
-  height: auto;
   text-align: center;
-}
-
-.showcaseHeader h5 {
-  color: var(--head-color);
-  margin: 1% 0;
-}
-
-.showcaseHeader h4 {
-  color: var(--head-color);
-  text-transform: capitalize;
-  margin: 1% 0;
-}
-
-.showcaseContainer {
-  width: 100%;
-  height: auto;
-}
-
-.showcaseCard {
-  text-align: center;
-}
-
-.showcaseContainer .showcaseCard img {
-  max-width: 100%;
-}
-
-.showcaseCard:nth-child(2) {
-  margin-top: 5%;
-}
-
-.showcaseCard h5 {
-  color: var(--head-color);
-  text-transform: capitalize;
-  margin: 6% 0;
-  font-size: 1.4rem;
-}
-
-.showcaseCard h4 {
-  color: var(--head-color);
-  text-transform: capitalize;
-  margin: 6% 0;
   font-size: 1.6rem;
+  width: 100%;
 }
 
-/* showcase section end */
-
-/* offer section start */
-
-.offerSection {
-  width: 100%;
-  height: auto;
-  padding: 8% 0;
-}
-
-.offerHeader {
-  width: 100%;
-  height: auto;
+.php_error {
   text-align: center;
-}
-
-.offerHeader h2 {
-  text-transform: capitalize;
-  color: var(--head-color);
-}
-
-/* offer section end */
-
-/* offer banner section start */
-
-.offerBanner {
-  width: 100%;
-  height: auto;
-  padding: 5% 0;
-  background: url(../img/offer-banner-01.jpg);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
-
-.offer_text_box {
-  padding: 3% 0 3% 8%;
-}
-
-.offer_text_box h4 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--head-color);
-  text-transform: capitalize;
-  margin: 2% 0;
-}
-
-.offer_text_box h3 {
-  color: var(--head-color);
-  text-transform: capitalize;
-  margin: 2% 0;
-}
-
-.offer_text_box p {
-  color: var(--head-color);
-  text-transform: capitalize;
-  font-size: 1.7rem;
-  font-weight: 700;
-  margin: 2% 0 7% 0;
-}
-
-/* offer banner section end */
-
-/* testimonial section start */
-
-.testimonialSection {
-  width: 100%;
-  height: auto;
-  padding: 5% 0;
-}
-
-.testimonialHeader {
-  width: 100%;
-  height: auto;
-  padding: 2% 0;
-  text-align: center;
-}
-
-.testimonialHeader h2 {
-  text-transform: capitalize;
-}
-
-.testimonialContainer {
-  width: 100%;
-  height: auto;
-}
-
-.testimonialCard {
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.07);
-  border-radius: 2rem;
-  padding: 3% 2%;
-}
-
-.testimonialCard p {
-  color: var(--head-color);
-  width: 100%;
-  font-size: 1.5rem;
-  line-height: 1.7;
-  letter-spacing: 0.05em;
-  margin: 2% 0 5% 0;
-}
-
-.star-icons {
-  margin: 8% 0;
-}
-
-.star-icons i {
-  font-size: 1.7rem;
-  padding: 0 1%;
   color: var(--base-color);
+  margin: 2%;
+  font-size: 15px;
+  font-weight: 400;
 }
 
-.clientStatus {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.clientStatus img {
-  max-width: 20%;
-  margin-right: 5%;
-}
-
-.clientStatus h5 {
-  text-transform: capitalize;
-  color: var(--head-color);
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-
-/* testimonial section end */
-
-/* brand section start */
-
-.brandSection {
-  width: 100%;
-  height: auto;
-  padding: 5% 0 2% 0;
-}
-
-.brandContainer {
-  width: 100%;
-  height: auto;
-}
-
-.brandBox h4 {
-  color: var(--head-color);
-  font-size: 1.7rem;
-  margin-top: 25%;
-  text-transform: capitalize;
-}
-
-.brandBox img {
-  max-width: 60%;
-  opacity: 0.45;
-  transition: var(--transition);
-}
-
-.brandBox img:hover {
-  opacity: 1;
-}
-
-/* brand section end */
-
-/* footer section start */
-
-.footerSection {
-  width: 100%;
-  height: auto;
-  padding: 1% 0;
-  background: #313131;
-}
-
-.footerWidget img {
-  max-width: 50%;
-  cursor: pointer;
-}
-
-.footerWidget h6 {
-  color: var(--font-color);
-  text-transform: capitalize;
-  margin-top: 5%;
-}
-
-/* footer section end */
+/* re-usable components end */
