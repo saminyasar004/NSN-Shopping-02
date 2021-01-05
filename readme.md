@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/saminyasar004/NSN-Shopping-02">
-    <img src="img/nsn.png" alt="Logo" width="180" height="80">
+    <img src="img/nsn.png" alt="Logo" width="200" height="80">
   </a>
 
 <br />
@@ -40,7 +40,7 @@ Please follow the below instructions to run this project in your machine:
    https://localhost/phpmyadmin
    ```
 8. Now click Import from your database menu (right corner)
-9. Then upload the selected sql file from - [6](6.) 6 no. line
+9. Then upload the selected sql file from 6 no. line
 10. Now open a new tab on your favourite browser, then hit
     ```sh
     https://localhost/home.php
