@@ -31,11 +31,17 @@ Please follow the below instructions to run this project in your machine:
    ```sh
    https://www.apachefriends.org/download.html
    ```
+3. Now install XAMPP server
+4. Enter to the project root directory
+5. Now open your favourite browser, then hit
+   ```sh
+   https://localhost/home.php
+   ```
 
 <!-- CONTACT -->
 
 ## Contact
 
-Samin Yasar - [sumit@learnwithsumit.com](mailto:yasarsamin57@gmail.com)
+Samin Yasar - [mailto:yasarsamin57@gmail.com](mailto:yasarsamin57@gmail.com)
 
 Github Profile: [https://github.com/saminyasar004](https://github.com/saminyasar004)
