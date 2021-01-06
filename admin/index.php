@@ -16,8 +16,11 @@ if (isset($_SESSION["user_role"]) && isset($_SESSION["user_fullname"])) {
         <title>Admin | Login</title>
         <!-- favicon icon -->
         <link rel="icon" href="./images/cart.png" type="image/x-icon">
+        <!-- bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Font Awesome Icon -->
+        <link rel="stylesheet" href="./icon/css/all.min.css">
+        <!-- custom stylesheet -->
         <link rel="stylesheet" href="css/style.css">
     </head>
 

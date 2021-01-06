@@ -11,10 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!--- goggole font poppince ------>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <!--- FONT AWESOME ------->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  <!--- FONT AWESOME 4 CDN ------>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Font Awesome Icon -->
+  <link rel="stylesheet" href="./icon/css/all.min.css">
   <!-- linking stylesheet file -->
   <link rel="stylesheet" href="vendor/css/normalize.css">
   <link rel="stylesheet" href="vendor/css/grid.css">
