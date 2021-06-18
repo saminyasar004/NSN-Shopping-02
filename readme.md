@@ -54,11 +54,3 @@ Please follow the below instructions to run this project in your machine:
     https://localhost/NSN-Shopping-02/home.php
     ```
 11. Now, all done! Let's enjoy..
-
-<!-- CONTACT -->
-
-## Contact
-
-Samin Yasar - [mailto:yasarsamin57@gmail.com](mailto:yasarsamin57@gmail.com)
-
-Github Profile: [https://github.com/saminyasar004](https://github.com/saminyasar004)
